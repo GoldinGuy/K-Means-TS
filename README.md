@@ -1,6 +1,27 @@
 # K-Means-TS
 
-[K-means](https://en.wikipedia.org/wiki/K-means_clustering) and [k-means++](https://en.wikipedia.org/wiki/K-means%2B%2B) clustering implementation for multiple dimensions of data. A Typescript rewrite of [Skmeans-JS](https://github.com/solzimer/skmeans#readme)
+💹 [K-means](https://en.wikipedia.org/wiki/K-means_clustering) and [k-means++](https://en.wikipedia.org/wiki/K-means%2B%2B) clustering implementation for multiple dimensions of data. A Typescript rewrite of [Skmeans-JS](https://github.com/solzimer/skmeans#readme)
+
+## Functionality & Params
+
+#### KMEANS(input_data, k, [type], [centroids], [iterations])
+
+- **data** Unidimiensional or multidimensional array of values to be clustered. for unidimiensional data, takes the form of a simple array _[1,2,3.....,n]_. For multidimensional data, takes a
+  NxM array _[[1,2],[2,3]....[n,m]]_
+- **k** Number of clusters
+- **centroids** Optional. Initial centroid values. If not provided, the algorith will try to choose an apropiate ones. Alternative values can be:
+  - **"kmrand"** Cluster initialization will be random, but with extra checking, so there will no be two equal initial centroids.
+  - **"kmpp"** The algorythm will use the [k-means++](https://en.wikipedia.org/wiki/K-means%2B%2B) cluster initialization method.
+- **iterations** Optional. Maximum number of iterations. If not provided, it will be set to 10000.
+- **distance function** Optional. Custom distance function. Takes two points as arguments and returns a scalar number.
+
+The function will return an object with the following data:
+
+- **it** The number of iterations performed until the algorithm has converged
+- **k** The cluster size
+- **centroids** The value for each centroid of the cluster
+- **idxs** The index to the centroid corresponding to each value of the data array
+- **test** Function to test new point membership
 
 ## Development setup
 
@@ -33,8 +54,13 @@ Alternatively, you can install the awesome VSCode extension [Code Runner](https:
 Simply import it using the following
 
 ```typescript
-const KMEANS: Function = require("./kmeans/kmeans.js");
-import { KMeans } from "./kmeans/kmeans";
+const KMEANS: Function = require("./<directory>/kmeans.js");
+```
+
+If you want to access the Utils or interfaces within the file, use
+
+```typescript
+import { KMeans, Utils } from "./<directory>/kmeans";
 ```
 
 Then test it!
@@ -45,10 +71,10 @@ var input_data: Array<Array<number>> = [
 	[7, 34, 15, 34, 17, 11, 34, 2, 35, 18, 52, 34, 33, 21],
 	[5, 19, 35, 17, 35, 18, 12, 45, 23, 56, 23, 45, 16, 3]
 ];
-var output: Array<Array<number>> = KMEANS(input_data, 5, "kmeans");
+var output: Array<Array<number>> = KMEANS(input_data, 5, "kmeans++");
 ```
 
-## Results
+Results
 
 ```javascript
 {
@@ -58,29 +84,6 @@ var output: Array<Array<number>> = KMEANS(input_data, 5, "kmeans");
 	centroids: [ 13, 23, 3 ]
 }
 ```
-
-## API
-
-### KMEANS(input_data, k, [type], [centroids], [iterations])
-
-Calculates unidimiensional and multidimensional k-means clustering on _data_. Parameters are:
-
-- **data** Unidimiensional or multidimensional array of values to be clustered. for unidimiensional data, takes the form of a simple array _[1,2,3.....,n]_. For multidimensional data, takes a
-  NxM array _[[1,2],[2,3]....[n,m]]_
-- **k** Number of clusters
-- **centroids** Optional. Initial centroid values. If not provided, the algorith will try to choose an apropiate ones. Alternative values can be:
-  - **"kmrand"** Cluster initialization will be random, but with extra checking, so there will no be two equal initial centroids.
-  - **"kmpp"** The algorythm will use the [k-means++](https://en.wikipedia.org/wiki/K-means%2B%2B) cluster initialization method.
-- **iterations** Optional. Maximum number of iterations. If not provided, it will be set to 10000.
-- **distance function** Optional. Custom distance function. Takes two points as arguments and returns a scalar number.
-
-The function will return an object with the following data:
-
-- **it** The number of iterations performed until the algorithm has converged
-- **k** The cluster size
-- **centroids** The value for each centroid of the cluster
-- **idxs** The index to the centroid corresponding to each value of the data array
-- **test** Function to test new point membership
 
 ## Examples
 
@@ -108,3 +111,17 @@ res.test(6);
 var res = skmeans(data, 3, null, 10);
 res.test(6, (x1, x2) => Math.abs(x1 - x2));
 ```
+
+## Contributing
+
+1. Fork K-Means-TS [here](https://github.com/GoldinGuy/K-Means-TS/fork)
+2. Create a feature branch (`git checkout -b feature/fooBar`)
+3. Commit your changes (`git commit -am 'Add some fooBar'`)
+4. Push to the branch (`git push origin feature/fooBar`)
+5. Create a new Pull Request
+
+## Meta
+
+Adapted from [@Solzimer](https://github.com/solzimer)'s [Skmeans-JS](https://github.com/solzimer/skmeans#readme) by [@GoldinGuy](https://github.com/GoldinGuy)
+
+<!-- Distributed under the GNU AGPLv3 license. See [LICENSE](https://github.com/GoldinGuy/PearDrop/blob/master/LICENSE) for more information. -->
