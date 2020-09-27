@@ -45,7 +45,7 @@ If you are using VSCode, enter `Ctrl-Shift-B` and then `tsc:watch`, which will a
 
 ### In this project - Node.js
 
-You can use this K-Means implementation by compiling it to JS, and then running it in the terminal with `node FileName.js`
+You can use this K-Means implementation by compiling it to JS and then running it in the terminal with `node FileName.js`
 
 Alternatively, you can install the awesome VSCode extension [Code Runner](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner), which is very convenient
 
@@ -114,13 +114,14 @@ var kmeans: KMeans = KMEANS(input_data, 3, "kmeans++", 20, (x, y) =>
 );
 ```
 
+<!--
 ## Contributing
 
 1. Fork K-Means-TS [here](https://github.com/GoldinGuy/K-Means-TS/fork)
 2. Create a feature branch (`git checkout -b feature/fooBar`)
 3. Commit your changes (`git commit -am 'Add some fooBar'`)
 4. Push to the branch (`git push origin feature/fooBar`)
-5. Create a new Pull Request
+5. Create a new Pull Request -->
 
 ## Meta
 
