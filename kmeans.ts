@@ -29,9 +29,9 @@ function kmeans(
 ): KMeans {
 	let cents: Centroids = [];
 	let indexes: Array<number> = [];
-	var cent_moved: boolean = false;
+	let cent_moved: boolean = false;
 	let iterations: number = max_it || MAX;
-	var count: Array<number> = [];
+	let count: Array<number> = [];
 
 	if (!type) {
 		let def_indexes = {};

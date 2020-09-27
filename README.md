@@ -4,24 +4,24 @@
 
 ## Functionality & Params
 
-#### KMEANS(input_data, k, [type], [centroids], [iterations])
+<!-- #### KMEANS(input_data, k, [type], [centroids], [iterations]) -->
 
-- **data** Unidimiensional or multidimensional array of values to be clustered. for unidimiensional data, takes the form of a simple array _[1,2,3.....,n]_. For multidimensional data, takes a
-  NxM array _[[1,2],[2,3]....[n,m]]_
-- **k** Number of clusters
-- **centroids** Optional. Initial centroid values. If not provided, the algorith will try to choose an apropiate ones. Alternative values can be:
-  - **"kmrand"** Cluster initialization will be random, but with extra checking, so there will no be two equal initial centroids.
-  - **"kmpp"** The algorythm will use the [k-means++](https://en.wikipedia.org/wiki/K-means%2B%2B) cluster initialization method.
-- **iterations** Optional. Maximum number of iterations. If not provided, it will be set to 10000.
-- **distance function** Optional. Custom distance function. Takes two points as arguments and returns a scalar number.
+| Param               | Description                                                                                                                    | Sample Type                                  | Required |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------- | -------- |
+| `Input Data`        | Array of values to be clustered. Can be multi-dimensional                                                                      | `Array<number>`, `Array<Array<number>>`, etc | Yes      |
+| `K`                 | Num clusters                                                                                                                   | `number`                                     | Yes      |
+| `Centroids`         | Initializes centroids. `Kmeans` for random, `Kmeans++` for the K-means++ algorithm. Will attempt to find them if not provided. | `String`                                     | Optional |
+| `Iterations`        | Max num of iterations. Default is `10000`                                                                                      | `number`                                     | Optional |
+| `Distance Function` | Custom function to determine distance between 2 points, returns num                                                            | `Function`                                   | Optional |
 
-The function will return an object with the following data:
+Returns the following object:
 
-- **it** The number of iterations performed until the algorithm has converged
-- **k** The cluster size
-- **centroids** The value for each centroid of the cluster
-- **idxs** The index to the centroid corresponding to each value of the data array
-- **test** Function to test new point membership
+| Return value | Description                                          | Sample type            |
+| ------------ | ---------------------------------------------------- | ---------------------- |
+| `Iterations` | Num iterations undergone                             | `number`               |
+| `K`          | Num clusters                                         | `number`               |
+| `Centroids`  | Centroid values for each cluster                     | `Array<number>`        |
+| `Indexes`    | Index of centroid for each value of input_data array | `Array<Array<number>>` |
 
 ## Development setup
 

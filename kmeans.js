@@ -11,9 +11,9 @@ function init(len, val, vect) {
 function kmeans(data, k, type, max_it, fn_dist) {
     let cents = [];
     let indexes = [];
-    var cent_moved = false;
+    let cent_moved = false;
     let iterations = max_it || MAX;
-    var count = [];
+    let count = [];
     if (!type) {
         let def_indexes = {};
         let i = 0;
@@ -33,7 +33,6 @@ function kmeans(data, k, type, max_it, fn_dist) {
     }
     do {
         init(k, 0, count);
-        // For each value in data, find the nearest centroid (Custom, multidimensional or unidimensional)
         for (const i in data) {
             let min = Infinity;
             let idx = 0;
@@ -48,10 +47,9 @@ function kmeans(data, k, type, max_it, fn_dist) {
                     idx = j;
                 }
             }
-            indexes[i] = idx; // Index of selected centroid
-            count[idx]++; // Num values for centroid
+            indexes[i] = idx;
+            count[idx]++;
         }
-        // Recalculate centroids
         let sum = [];
         let old = [];
         if (data[0].length > 0) {
@@ -66,27 +64,20 @@ function kmeans(data, k, type, max_it, fn_dist) {
                 old[j] = cents[j];
             }
         }
-        // If multidimensional, sum values and accumulate value on the centroid for current vector for each centroid
         if (data[0].length > 0) {
             for (let j = 0; j < k; j++) {
                 cents[j] = [];
             }
             for (const i in data) {
                 for (let h = 0; h < data[0].length; h++) {
-                    sum[indexes[i]][h] += data[i][h]; // Sum values for current centroid + Current vector
+                    sum[indexes[i]][h] += data[i][h];
                 }
             }
-            // Calculate the average for each centroid
             cent_moved = true;
             for (let j = 0; j < k; j++) {
-                /*
-                sum[j] |  Accumulated centroid values
-                old[j] | Old centroid value
-                count[j] | Number of elements for this centroid
-                */
-                let cent_j = cents[j]; // Current centroid
+                let cent_j = cents[j];
                 for (let h = 0; h < data[0].length; h++) {
-                    cent_j[h] = sum[j][h] / count[j] || 0; // New avg from new centroid
+                    cent_j[h] = sum[j][h] / count[j] || 0;
                 }
                 if (cent_moved) {
                     for (let h = 0; h < data[0].length; h++) {
@@ -98,7 +89,6 @@ function kmeans(data, k, type, max_it, fn_dist) {
                 }
             }
         }
-        // If unidimensional, sum values and for each centroid, calculate avg, then determine if centroids moved
         else {
             for (const i in data) {
                 let idx = indexes[i];
@@ -127,7 +117,6 @@ function kmeans(data, k, type, max_it, fn_dist) {
 }
 module.exports = kmeans;
 class Cluster {
-    // K-means initial centroid selection
     static k_means(data, k) {
         let cents = [];
         let t = k << 2;
@@ -146,19 +135,15 @@ class Cluster {
         else
             return cents;
     }
-    // K-means++ initial centroid selection
     static k_means_pp(data, k, fn_dist) {
         const distance = fn_dist || (data[0].length ? Distance.euclideanDist : Distance.dist);
         let cents = [];
         let map = {};
-        // Initial random centroid
         let c = data[Math.floor(Math.random() * data.length)];
         let key = data[0].length > 0 ? c.join("_") : `${c}`;
         cents.push(c);
         map[key] = true;
-        // Get next centroids
         while (cents.length < k) {
-            // Find min distances between current centroids and data points
             let distances = [];
             let prs = [];
             let d_sum = 0;
@@ -171,21 +156,17 @@ class Cluster {
                 }
                 distances[i] = min;
             }
-            // Sum min distances
             for (const i in data) {
                 d_sum += distances[i];
             }
-            // Probabilities/cumulative prob
             for (const i in data) {
                 prs[i] = { i: i, v: data[i], pr: distances[i] / d_sum, cs: 0 };
             }
             prs.sort((a, b) => a.pr - b.pr);
-            // Cumulative probabilities
             prs[0].cs = prs[0].pr;
             for (let i = 1; i < data.length; i++) {
                 prs[i].cs = prs[i - 1].cs + prs[i].pr;
             }
-            // Gets items where cum sum >= random num
             let rnd = Math.random();
             let idx = 0;
             while (idx < data.length - 1 && prs[idx++].cs < rnd)
@@ -196,8 +177,6 @@ class Cluster {
     }
 }
 class Distance {
-    // The "ordinary" straight-line distance between two points in Euclidean space
-    // ed((x1, y1), (x2, y2)) = || (x1, y1) – (x2, y2) ||
     static euclideanDist(x, y) {
         let sum = 0;
         for (const i in x) {
@@ -206,8 +185,6 @@ class Distance {
         }
         return sum;
     }
-    // The distance between two points measured along axes at right angles
-    // md((x1, y1), (x2, y2)) = | x1 – x2 | + | y1 – y2 |
     static manhattanDist(x, y) {
         let sum = 0;
         let d = 0;
@@ -217,8 +194,6 @@ class Distance {
         }
         return sum;
     }
-    // Absolute distance between two values
-    // d(x, y, z) = z ? || x - y || : || x - y || * || x - y ||
     static dist(x, y, sqrt) {
         const d = Math.abs(x - y);
         return sqrt ? d : d * d;
