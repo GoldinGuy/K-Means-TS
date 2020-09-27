@@ -1,5 +1,5 @@
 export interface KMeans {
-	it: number;
+	iterations: number;
 	k: number;
 	indexes: Array<number>;
 	centroids: Centroids;
@@ -23,7 +23,7 @@ function init(len: number, val: number, vect: Array<number>): Array<number> {
 function kmeans(
 	data: Vectors,
 	k: number,
-	type?: string,
+	init_cent?: String | Array<any>,
 	max_it?: number,
 	fn_dist?: Function
 ): KMeans {
@@ -33,20 +33,23 @@ function kmeans(
 	let iterations: number = max_it || MAX;
 	let count: Array<number> = [];
 
-	if (!type) {
-		let def_indexes = {};
+	if (!init_cent) {
+		let def_indexes: Array<boolean> = [];
+		// let def_indexes = {};
 		let i: number = 0;
 		while (cents.length < k) {
-			let idx = Math.floor(Math.random() * data.length);
+			let idx: number = Math.floor(Math.random() * data.length);
 			if (!def_indexes[idx]) {
 				def_indexes[idx] = true;
 				cents[i++] = data[idx];
 			}
 		}
-	} else if (type === "kmeans") {
+	} else if (init_cent === "kmeans") {
 		cents = Cluster.k_means(data, k);
-	} else if (type === "kmeans++") {
+	} else if (init_cent === "kmeans++") {
 		cents = Cluster.k_means_pp(data, k, fn_dist);
+	} else {
+		cents = Array.from(init_cent);
 	}
 
 	do {
@@ -138,7 +141,7 @@ function kmeans(
 	} while (!cent_moved);
 
 	const k_means_obj: KMeans = {
-		it: (max_it || MAX) - iterations,
+		iterations: (max_it || MAX) - iterations,
 		k: k,
 		indexes: indexes,
 		centroids: cents
@@ -182,7 +185,7 @@ class Cluster {
 		while (cents.length < k) {
 			// Find min distances between current centroids and data points
 			let distances: Array<number> = [];
-			let prs: Array<{
+			let probs: Array<{
 				i: string;
 				v: Vector;
 				pr: number;
@@ -203,25 +206,31 @@ class Cluster {
 			}
 			// Probabilities/cumulative prob
 			for (const i in data) {
-				prs[i] = { i: i, v: data[i], pr: distances[i] / d_sum, cs: 0 };
+				probs[i] = { i: i, v: data[i], pr: distances[i] / d_sum, cs: 0 };
 			}
-			prs.sort((a, b) => a.pr - b.pr);
+			probs.sort((a, b) => a.pr - b.pr);
 			// Cumulative probabilities
-			prs[0].cs = prs[0].pr;
+			probs[0].cs = probs[0].pr;
 			for (let i = 1; i < data.length; i++) {
-				prs[i].cs = prs[i - 1].cs + prs[i].pr;
+				probs[i].cs = probs[i - 1].cs + probs[i].pr;
 			}
 			// Gets items where cum sum >= random num
 			let rnd: number = Math.random();
 			let idx: number = 0;
-			while (idx < data.length - 1 && prs[idx++].cs < rnd);
-			cents.push(prs[idx - 1].v);
+			while (idx < data.length - 1 && probs[idx++].cs < rnd);
+			cents.push(probs[idx - 1].v);
 		}
 		return cents;
 	}
 }
 
 class Distance {
+	// Absolute distance between two values
+	// d(x, y, z) = z ? || x - y || : || x - y || * || x - y ||
+	static dist(x: number, y: number, sqrt?: number): number {
+		const d: number = Math.abs(x - y);
+		return sqrt ? d : d * d;
+	}
 	// The "ordinary" straight-line distance between two points in Euclidean space
 	// ed((x1, y1), (x2, y2)) = || (x1, y1) – (x2, y2) ||
 	static euclideanDist(x: Centroid, y: Centroid): number {
@@ -232,7 +241,6 @@ class Distance {
 		}
 		return sum;
 	}
-
 	// The distance between two points measured along axes at right angles
 	// md((x1, y1), (x2, y2)) = | x1 – x2 | + | y1 – y2 |
 	static manhattanDist(x: Centroid, y: Centroid): number {
@@ -243,12 +251,5 @@ class Distance {
 			sum += d >= 0 ? d : -d;
 		}
 		return sum;
-	}
-
-	// Absolute distance between two values
-	// d(x, y, z) = z ? || x - y || : || x - y || * || x - y ||
-	static dist(x: number, y: number, sqrt?: number): number {
-		const d: number = Math.abs(x - y);
-		return sqrt ? d : d * d;
 	}
 }

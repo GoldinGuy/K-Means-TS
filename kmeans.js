@@ -8,14 +8,14 @@ function init(len, val, vect) {
     }
     return vect;
 }
-function kmeans(data, k, type, max_it, fn_dist) {
+function kmeans(data, k, init_cent, max_it, fn_dist) {
     let cents = [];
     let indexes = [];
     let cent_moved = false;
     let iterations = max_it || MAX;
     let count = [];
-    if (!type) {
-        let def_indexes = {};
+    if (!init_cent) {
+        let def_indexes = [];
         let i = 0;
         while (cents.length < k) {
             let idx = Math.floor(Math.random() * data.length);
@@ -25,11 +25,14 @@ function kmeans(data, k, type, max_it, fn_dist) {
             }
         }
     }
-    else if (type === "kmeans") {
+    else if (init_cent === "kmeans") {
         cents = Cluster.k_means(data, k);
     }
-    else if (type === "kmeans++") {
+    else if (init_cent === "kmeans++") {
         cents = Cluster.k_means_pp(data, k, fn_dist);
+    }
+    else {
+        cents = Array.from(init_cent);
     }
     do {
         init(k, 0, count);
@@ -108,7 +111,7 @@ function kmeans(data, k, type, max_it, fn_dist) {
         cent_moved = cent_moved || --iterations <= 0;
     } while (!cent_moved);
     const k_means_obj = {
-        it: (max_it || MAX) - iterations,
+        iterations: (max_it || MAX) - iterations,
         k: k,
         indexes: indexes,
         centroids: cents
@@ -145,7 +148,7 @@ class Cluster {
         map[key] = true;
         while (cents.length < k) {
             let distances = [];
-            let prs = [];
+            let probs = [];
             let d_sum = 0;
             for (const i in data) {
                 let min = Infinity;
@@ -160,23 +163,27 @@ class Cluster {
                 d_sum += distances[i];
             }
             for (const i in data) {
-                prs[i] = { i: i, v: data[i], pr: distances[i] / d_sum, cs: 0 };
+                probs[i] = { i: i, v: data[i], pr: distances[i] / d_sum, cs: 0 };
             }
-            prs.sort((a, b) => a.pr - b.pr);
-            prs[0].cs = prs[0].pr;
+            probs.sort((a, b) => a.pr - b.pr);
+            probs[0].cs = probs[0].pr;
             for (let i = 1; i < data.length; i++) {
-                prs[i].cs = prs[i - 1].cs + prs[i].pr;
+                probs[i].cs = probs[i - 1].cs + probs[i].pr;
             }
             let rnd = Math.random();
             let idx = 0;
-            while (idx < data.length - 1 && prs[idx++].cs < rnd)
+            while (idx < data.length - 1 && probs[idx++].cs < rnd)
                 ;
-            cents.push(prs[idx - 1].v);
+            cents.push(probs[idx - 1].v);
         }
         return cents;
     }
 }
 class Distance {
+    static dist(x, y, sqrt) {
+        const d = Math.abs(x - y);
+        return sqrt ? d : d * d;
+    }
     static euclideanDist(x, y) {
         let sum = 0;
         for (const i in x) {
@@ -193,9 +200,5 @@ class Distance {
             sum += d >= 0 ? d : -d;
         }
         return sum;
-    }
-    static dist(x, y, sqrt) {
-        const d = Math.abs(x - y);
-        return sqrt ? d : d * d;
     }
 }
