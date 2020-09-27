@@ -24,8 +24,7 @@ function kmeans(
 	data: Vectors,
 	k: number,
 	init_cent?: String | Array<any>,
-	max_it?: number,
-	fn_dist?: Function
+	max_it?: number
 ): KMeans {
 	let cents: Centroids = [];
 	let indexes: Array<number> = [];
@@ -35,7 +34,6 @@ function kmeans(
 
 	if (!init_cent) {
 		let def_indexes: Array<boolean> = [];
-		// let def_indexes = {};
 		let i: number = 0;
 		while (cents.length < k) {
 			let idx: number = Math.floor(Math.random() * data.length);
@@ -47,7 +45,7 @@ function kmeans(
 	} else if (init_cent === "kmeans") {
 		cents = Cluster.k_means(data, k);
 	} else if (init_cent === "kmeans++") {
-		cents = Cluster.k_means_pp(data, k, fn_dist);
+		cents = Cluster.k_means_pp(data, k);
 	} else {
 		cents = Array.from(init_cent);
 	}
@@ -59,11 +57,10 @@ function kmeans(
 			let min: number = Infinity;
 			let idx: number = 0;
 			for (let j = 0; j < k; j++) {
-				let dist: number = fn_dist
-					? fn_dist(data[i], cents[j])
-					: data[0].length > 0
-					? Distance.euclideanDist(data[i], cents[j])
-					: Math.abs(data[i][0] - cents[j][0]);
+				let dist: number =
+					data[0].length > 0
+						? Distance.euclideanDist(data[i], cents[j])
+						: Math.abs(data[i][0] - cents[j][0]);
 				if (dist <= min) {
 					min = dist;
 					idx = j;
@@ -171,9 +168,8 @@ class Cluster {
 	}
 
 	// K-means++ initial centroid selection
-	static k_means_pp(data: Vectors, k: number, fn_dist?: Function): Centroids {
-		const distance: Function =
-			fn_dist || (data[0].length ? Distance.euclideanDist : Distance.dist);
+	static k_means_pp(data: Vectors, k: number): Centroids {
+		const distance: Function = data[0].length ? Distance.euclideanDist : Distance.dist;
 		let cents: Centroids = [];
 		let map = {};
 		// Initial random centroid

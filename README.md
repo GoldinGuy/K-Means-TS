@@ -12,7 +12,6 @@
 | `K`          | Num clusters                                                                                                                   | `number`                                | Yes      |
 | `Centroids`  | Initializes centroids. `Kmeans` for random, `Kmeans++` for the K-means++ algorithm. Will attempt to find them if not provided. | `String`                                | Optional |
 | `Iterations` | Max num of iterations. Default is `10000`                                                                                      | `number`                                | Optional |
-| `Distance`   | Custom function to determine distance between 2 points, returns num                                                            | `Function`                              | Optional |
 
 Returns the following object:
 
@@ -107,11 +106,6 @@ var kmeans: KMeans = KMEANS(input_data, 5, "kmeans++");
 
 // K-means w/ 7 clusters, random centroids, and 15 max iterations
 var kmeans: KMeans = KMEANS(input_data, 7, null, 15);
-
-// K-means++ w/ 3 clusters, 20 max iterations, & custom distance function
-var kmeans: KMeans = KMEANS(input_data, 3, "kmeans++", 20, (x, y) =>
-	Math.abs(x - y)
-);
 ```
 
 K-Means-TS can also be seen in [MTG-Meta-TS](https://github.com/GoldinGuy/MTGMeta-TS)
