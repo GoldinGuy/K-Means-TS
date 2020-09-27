@@ -119,7 +119,7 @@ function kmeans(
 				}
 			}
 		}
-		// If unidimensional, sum values and for each centroid, calculate avg, then determine if centroids moved
+		// If one-dimensional, sum values and for each centroid, calculate avg, then determine if centroids moved
 		else {
 			for (const i in data) {
 				let idx: number = indexes[i];

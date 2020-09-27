@@ -1,6 +1,6 @@
 # K-Means-TS
 
-💹 [K-means](https://en.wikipedia.org/wiki/K-means_clustering) and [k-means++](https://en.wikipedia.org/wiki/K-means%2B%2B) clustering implementation for multiple dimensions of data. A Typescript rewrite of [Skmeans-JS](https://github.com/solzimer/skmeans#readme)
+💹 [K-means](https://en.wikipedia.org/wiki/K-means_clustering) and [k-means++](https://en.wikipedia.org/wiki/K-means%2B%2B) clustering implementation. A Typescript rewrite of [Skmeans-JS](https://github.com/solzimer/skmeans#readme)
 
 ## Functionality & Params
 
