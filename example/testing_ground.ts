@@ -7,7 +7,7 @@ const sample_input_data: Array<Array<number>> = [
 	[5, 19, 35, 17, 35, 18, 12, 45, 23, 56, 23, 45, 16, 3]
 ];
 var sample_output: KMeans = KMEANS(sample_input_data, 3, "kmeans");
-console.log(JSON.stringify(sample_output, null, 4));
+console.log(JSON.stringify(sample_output));
 
 // generate random 2D array to test w/
 const generateRandomArray = ({ width, height }) =>
@@ -16,7 +16,7 @@ const generateRandomArray = ({ width, height }) =>
 	);
 
 const input_data = generateRandomArray({ width: 15, height: 20 });
-console.log(JSON.stringify(input_data, null, 4));
+console.log(JSON.stringify(input_data));
 
 var output: KMeans = KMEANS(input_data, 3, "kmeans++");
-console.log(JSON.stringify(output, null, 4));
+console.log(JSON.stringify(output));
