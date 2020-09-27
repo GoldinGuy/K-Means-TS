@@ -5,7 +5,7 @@ export interface KMeans {
 	centroids: Centroids;
 }
 
-export type UniMultiDimensionalArray = Array<any>;
+export type UniMultiDimensionalArray = Array<any>; // needs to be able to handle array of any size
 export type Vector = Array<number>;
 export type Vectors = Array<Vector>;
 export type Centroid = Array<number>;
@@ -31,7 +31,7 @@ function kmeans(
 	let indexes: Array<number> = [];
 	let cent_moved: boolean = false;
 	let iterations: number = max_it || MAX;
-	let count: Array<number> = [];
+	let count: Vector = [];
 
 	if (!init_cent) {
 		let def_indexes: Array<boolean> = [];
@@ -72,8 +72,8 @@ function kmeans(
 		}
 
 		// Recalculate centroids
-		let sum: Array<any> = [];
-		let old: Array<Array<number>> = [];
+		let sum: UniMultiDimensionalArray = [];
+		let old: Centroids = [];
 		if (data[0].length > 0) {
 			for (let j = 0; j < k; j++) {
 				sum[j] = init(data[0].length, 0, sum[j]);
