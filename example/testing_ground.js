@@ -8,8 +8,8 @@ const sample_input_data = [
 ];
 var sample_output = KMEANS(sample_input_data, 3, "kmeans");
 console.log(JSON.stringify(sample_output));
-const generateRandomArray = ({ width, height }) => Array.from({ length: height }, () => Array.from({ length: width }, () => Math.floor(Math.random() * 2)));
-const input_data = generateRandomArray({ width: 15, height: 20 });
+const generateRandomArray = (w, h) => Array.from({ length: h }, () => Array.from({ length: w }, () => Math.floor(Math.random() * 2)));
+const input_data = generateRandomArray(15, 20);
 console.log(JSON.stringify(input_data));
 var output = KMEANS(input_data, 3, "kmeans++");
 console.log(JSON.stringify(output));

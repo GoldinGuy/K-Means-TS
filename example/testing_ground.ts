@@ -10,12 +10,12 @@ var sample_output: KMeans = KMEANS(sample_input_data, 3, "kmeans");
 console.log(JSON.stringify(sample_output));
 
 // generate random 2D array to test w/
-const generateRandomArray = ({ width, height }) =>
-	Array.from({ length: height }, () =>
-		Array.from({ length: width }, () => Math.floor(Math.random() * 2))
+const generateRandomArray = (w: number, h: number) =>
+	Array.from({ length: h }, () =>
+		Array.from({ length: w }, () => Math.floor(Math.random() * 2))
 	);
 
-const input_data = generateRandomArray({ width: 15, height: 20 });
+const input_data = generateRandomArray(15, 20);
 console.log(JSON.stringify(input_data));
 
 var output: KMeans = KMEANS(input_data, 3, "kmeans++");
