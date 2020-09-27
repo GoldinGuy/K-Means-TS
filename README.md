@@ -114,6 +114,8 @@ var kmeans: KMeans = KMEANS(input_data, 3, "kmeans++", 20, (x, y) =>
 );
 ```
 
+K-Means-TS can also be seen in [MTG-Meta-TS](https://github.com/GoldinGuy/MTGMeta-TS)
+
 <!--
 ## Contributing
 
