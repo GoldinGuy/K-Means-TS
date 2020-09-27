@@ -1,7 +1,7 @@
 const KMEANS: Function = require("../kmeans.js");
-import { KMeans } from "../kmeans";
+import { KMeans, Vectors } from "../kmeans";
 
-const sample_input_data: Array<Array<number>> = [
+const sample_input_data: Vectors = [
 	[1, 12, 14, 4, 25, 35, 22, 3, 14, 5, 51, 2, 23, 24, 15],
 	[7, 34, 15, 34, 17, 11, 34, 2, 35, 18, 52, 34, 33, 21],
 	[5, 19, 35, 17, 35, 18, 12, 45, 23, 56, 23, 45, 16, 3]

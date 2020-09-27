@@ -133,7 +133,7 @@ class Cluster {
             }
         }
         if (cents.length < k) {
-            throw Error("Error initializing clusters");
+            throw Error("Failed to initialize clusters");
         }
         else
             return cents;

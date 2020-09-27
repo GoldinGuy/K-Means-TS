@@ -1,19 +1,18 @@
 # K-Means-TS
 
-💹 [K-means](https://en.wikipedia.org/wiki/K-means_clustering) and [k-means++](https://en.wikipedia.org/wiki/K-means%2B%2B) clustering implementation for multiple dimensions of data.
-A Typescript rewrite of [Skmeans-JS](https://github.com/solzimer/skmeans#readme)
+💹 [K-means](https://en.wikipedia.org/wiki/K-means_clustering) and [k-means++](https://en.wikipedia.org/wiki/K-means%2B%2B) clustering implementation for multiple dimensions of data. A Typescript rewrite of [Skmeans-JS](https://github.com/solzimer/skmeans#readme)
 
 ## Functionality & Params
 
 <!-- #### KMEANS(input_data, k, [type], [centroids], [iterations]) -->
 
-| Param               | Description                                                                                                                    | Sample Type                             | Required |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------- | -------- |
-| `Input Data`        | Array of values to be clustered. Can be multi-dimensional                                                                      | `Array<number>`, `Array<Array<number>>` | Yes      |
-| `K`                 | Num clusters                                                                                                                   | `number`                                | Yes      |
-| `Centroids`         | Initializes centroids. `Kmeans` for random, `Kmeans++` for the K-means++ algorithm. Will attempt to find them if not provided. | `String`                                | Optional |
-| `Iterations`        | Max num of iterations. Default is `10000`                                                                                      | `number`                                | Optional |
-| `Distance Function` | Custom function to determine distance between 2 points, returns num                                                            | `Function`                              | Optional |
+| Param        | Description                                                                                                                    | Sample Type                             | Required |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------- | -------- |
+| `Input Data` | Array of values to be clustered. Can be multi-dimensional                                                                      | `Array<number>`, `Array<Array<number>>` | Yes      |
+| `K`          | Num clusters                                                                                                                   | `number`                                | Yes      |
+| `Centroids`  | Initializes centroids. `Kmeans` for random, `Kmeans++` for the K-means++ algorithm. Will attempt to find them if not provided. | `String`                                | Optional |
+| `Iterations` | Max num of iterations. Default is `10000`                                                                                      | `number`                                | Optional |
+| `Distance`   | Custom function to determine distance between 2 points, returns num                                                            | `Function`                              | Optional |
 
 Returns the following object:
 
@@ -40,7 +39,7 @@ This will create a `tsconfig.json` file. Ensure you have the following settings:
 "downlevelIteration": true
 ```
 
-If you are using VSCode, click `Ctrl-Shift-B` and then `tsc:watch`, which will auto-compile TS to JS
+If you are using VSCode, enter `Ctrl-Shift-B` and then `tsc:watch`, which will auto-compile TS to JS
 
 ## Usage
 
@@ -72,7 +71,7 @@ var input_data: Array<Array<number>> = [
 	[7, 34, 15, 34, 17, 11, 34, 2, 35, 18, 52, 34, 33, 21],
 	[5, 19, 35, 17, 35, 18, 12, 45, 23, 56, 23, 45, 16, 3]
 ];
-var output: Array<Array<number>> = KMEANS(input_data, 5, "kmeans++");
+var output: Array<Array<number>> = KMEANS(input_data, 3, "kmeans");
 ```
 
 Returns

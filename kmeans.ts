@@ -12,7 +12,7 @@ export type Centroids = Array<Centroid>;
 
 const MAX: number = 10000;
 
-function init(len: number, val: number, vect: Array<number>): Array<number> {
+function init(len: number, val: number, vect: Vector): Vector {
 	vect = vect || [];
 	for (let i = 0; i < len; i++) {
 		vect[i] = val;
@@ -166,7 +166,7 @@ class Cluster {
 			}
 		}
 		if (cents.length < k) {
-			throw Error("Error initializing clusters");
+			throw Error("Failed to initialize clusters");
 		} else return cents;
 	}
 
