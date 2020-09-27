@@ -52,7 +52,7 @@ function kmeans(
 
 	do {
 		init(k, 0, count);
-		// For each value in data, find the nearest centroid (Custom, multidimensional or unidimensional)
+		// For each value in data, find nearest centroid (Custom, multidimensional or one-dimensional)
 		for (const i in data) {
 			let min: number = Infinity;
 			let idx: number = 0;
@@ -66,7 +66,7 @@ function kmeans(
 					idx = j;
 				}
 			}
-			indexes[i] = idx; // Index of selected centroid
+			indexes[i] = idx; // Idx of centroid
 			count[idx]++; // Num values for centroid
 		}
 
@@ -84,7 +84,7 @@ function kmeans(
 				old[j] = cents[j];
 			}
 		}
-		// If multidimensional, sum values and accumulate value on the centroid for current vector for each centroid
+		// If multidimensional, sum values & accumulate value on the centroid for current vector for each centroid
 		if (data[0].length > 0) {
 			for (let j = 0; j < k; j++) {
 				cents[j] = [];
@@ -94,17 +94,17 @@ function kmeans(
 					sum[indexes[i]][h] += data[i][h]; // Sum values for current centroid + Current vector
 				}
 			}
-			// Calculate the average for each centroid
+			// Calculate the avg for each centroid
 			cent_moved = true;
 			for (let j = 0; j < k; j++) {
 				/* 
-                sum[j] |  Accumulated centroid values
+                sum[j] |  Sum of centroid values
                 old[j] | Old centroid value
-                count[j] | Number of elements for this centroid
+                count[j] | Num elements for centroid
                 */
 				let cent_j: Centroid = cents[j]; // Current centroid
 				for (let h = 0; h < data[0].length; h++) {
-					cent_j[h] = sum[j][h] / count[j] || 0; // New avg from new centroid
+					cent_j[h] = sum[j][h] / count[j] || 0; // Avg from new centroid
 				}
 				if (cent_moved) {
 					for (let h = 0; h < data[0].length; h++) {
@@ -116,7 +116,7 @@ function kmeans(
 				}
 			}
 		}
-		// If one-dimensional, sum values and for each centroid, calculate avg, then determine if centroids moved
+		// If one-dimensional, sum values & for each centroid, calculate avg, then determine if centroids moved
 		else {
 			for (const i in data) {
 				let idx: number = indexes[i];
@@ -169,7 +169,9 @@ class Cluster {
 
 	// K-means++ initial centroid selection
 	static k_means_pp(data: Vectors, k: number): Centroids {
-		const distance: Function = data[0].length ? Distance.euclideanDist : Distance.dist;
+		const distance: Function = data[0].length
+			? Distance.euclideanDist
+			: Distance.dist;
 		let cents: Centroids = [];
 		let map = {};
 		// Initial random centroid
@@ -204,7 +206,7 @@ class Cluster {
 				probs[i] = { i: i, v: data[i], pr: distances[i] / d_sum, cs: 0 };
 			}
 			probs.sort((a, b) => a.pr - b.pr);
-			// Cumulative probabilities
+			// Cumulative probs
 			probs[0].cs = probs[0].pr;
 			for (let i = 1; i < data.length; i++) {
 				probs[i].cs = probs[i - 1].cs + probs[i].pr;
