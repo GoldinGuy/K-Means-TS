@@ -30,7 +30,7 @@ function kmeans(
 	let cents: Centroids = [];
 	let indexes: Array<number> = [];
 	let cent_moved: boolean = false;
-	let iterations: number = max_it ?? MAX;
+	let iterations: number = max_it || MAX;
 	let count: Array<number> = [];
 
 	if (!init_cent) {
@@ -141,7 +141,7 @@ function kmeans(
 	} while (!cent_moved);
 
 	const k_means_obj: KMeans = {
-		iterations: (max_it ?? MAX) - iterations,
+		iterations: (max_it || MAX) - iterations,
 		k: k,
 		indexes: indexes,
 		centroids: cents
