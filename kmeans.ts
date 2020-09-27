@@ -178,9 +178,8 @@ class Cluster {
 		let map = {};
 		// Initial random centroid
 		let c: Centroid = data[Math.floor(Math.random() * data.length)];
-		let key: string = data[0].length > 0 ? c.join("_") : `${c}`;
 		cents.push(c);
-		map[key] = true;
+		map[data[0].length > 0 ? c.join("_") : `${c}`] = true;
 		// Get next centroids
 		while (cents.length < k) {
 			// Find min distances between current centroids and data points

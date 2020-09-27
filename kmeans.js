@@ -143,9 +143,8 @@ class Cluster {
         let cents = [];
         let map = {};
         let c = data[Math.floor(Math.random() * data.length)];
-        let key = data[0].length > 0 ? c.join("_") : `${c}`;
         cents.push(c);
-        map[key] = true;
+        map[data[0].length > 0 ? c.join("_") : `${c}`] = true;
         while (cents.length < k) {
             let distances = [];
             let probs = [];
