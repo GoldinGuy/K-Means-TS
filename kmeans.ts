@@ -5,6 +5,7 @@ export interface KMeans {
 	centroids: Centroids;
 }
 
+export type UniMultiDimensionalArray = Array<any>;
 export type Vector = Array<number>;
 export type Vectors = Array<Vector>;
 export type Centroid = Array<number>;
@@ -21,7 +22,7 @@ function init(len: number, val: number, vect: Vector): Vector {
 }
 
 function kmeans(
-	data: Vectors,
+	data: UniMultiDimensionalArray,
 	k: number,
 	init_cent?: String | Array<any>,
 	max_it?: number

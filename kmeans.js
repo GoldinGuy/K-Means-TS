@@ -8,7 +8,7 @@ function init(len, val, vect) {
     }
     return vect;
 }
-function kmeans(data, k, init_cent, max_it, fn_dist) {
+function kmeans(data, k, init_cent, max_it) {
     let cents = [];
     let indexes = [];
     let cent_moved = false;
@@ -29,7 +29,7 @@ function kmeans(data, k, init_cent, max_it, fn_dist) {
         cents = Cluster.k_means(data, k);
     }
     else if (init_cent === "kmeans++") {
-        cents = Cluster.k_means_pp(data, k, fn_dist);
+        cents = Cluster.k_means_pp(data, k);
     }
     else {
         cents = Array.from(init_cent);
@@ -40,11 +40,9 @@ function kmeans(data, k, init_cent, max_it, fn_dist) {
             let min = Infinity;
             let idx = 0;
             for (let j = 0; j < k; j++) {
-                let dist = fn_dist
-                    ? fn_dist(data[i], cents[j])
-                    : data[0].length > 0
-                        ? Distance.euclideanDist(data[i], cents[j])
-                        : Math.abs(data[i][0] - cents[j][0]);
+                let dist = data[0].length > 0
+                    ? Distance.euclideanDist(data[i], cents[j])
+                    : Math.abs(data[i][0] - cents[j][0]);
                 if (dist <= min) {
                     min = dist;
                     idx = j;
@@ -138,8 +136,10 @@ class Cluster {
         else
             return cents;
     }
-    static k_means_pp(data, k, fn_dist) {
-        const distance = fn_dist || (data[0].length ? Distance.euclideanDist : Distance.dist);
+    static k_means_pp(data, k) {
+        const distance = data[0].length
+            ? Distance.euclideanDist
+            : Distance.dist;
         let cents = [];
         let map = {};
         let c = data[Math.floor(Math.random() * data.length)];
