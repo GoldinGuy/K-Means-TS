@@ -1,6 +1,6 @@
 # K-Means-TS
 
-💹 [K-means](https://en.wikipedia.org/wiki/K-means_clustering) and [k-means++](https://en.wikipedia.org/wiki/K-means%2B%2B) clustering implementation. A Typescript rewrite of [Skmeans-JS](https://github.com/solzimer/skmeans#readme)
+💹 [K-means](https://en.wikipedia.org/wiki/K-means_clustering) and [k-means++](https://en.wikipedia.org/wiki/K-means%2B%2B) clustering implementation. A Typescript rewrite of [Skmeans-JS](https://github.com/solzimer/skmeans#readme), which is an awesome JS clustering package
 
 ## Functionality & Params
 
@@ -44,7 +44,7 @@ If you are using VSCode, enter `Ctrl-Shift-B` and then `tsc:watch`, which will a
 
 ### In this project - Node.js
 
-You can use this K-Means implementation by compiling it to JS and then running it in the terminal with `node FileName.js`
+You can use this K-Means implementation by either using `ts-node` and running `ts-node kmeans.ts`, or by compiling it to JS and then running it in the terminal with `node kmeans.js`
 
 Alternatively, you can install the awesome VSCode extension [Code Runner](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner), which is very convenient
 
@@ -110,17 +110,17 @@ var kmeans: KMeans = KMEANS(input_data, 7, null, 15);
 
 K-Means-TS can also be seen in [MTG-Meta-TS](https://github.com/GoldinGuy/MTGMeta-TS)
 
-<!--
+
 ## Contributing
 
 1. Fork K-Means-TS [here](https://github.com/GoldinGuy/K-Means-TS/fork)
 2. Create a feature branch (`git checkout -b feature/fooBar`)
 3. Commit your changes (`git commit -am 'Add some fooBar'`)
 4. Push to the branch (`git push origin feature/fooBar`)
-5. Create a new Pull Request -->
+5. Create a new Pull Request
 
 ## Meta
 
 Adapted from [@Solzimer's](https://github.com/solzimer) [Skmeans-JS](https://github.com/solzimer/skmeans#readme) by [@GoldinGuy](https://github.com/GoldinGuy)
 
-<!-- Distributed under the GNU AGPLv3 license. See [LICENSE](https://github.com/GoldinGuy/PearDrop/blob/master/LICENSE) for more information. -->
+Distributed under the MIT license. See [LICENSE](https://github.com/GoldinGuy/K-Means-TS/blob/master/LICENSE) for more information.

@@ -1,4 +1,5 @@
-const KMEANS: Function = require("../kmeans.js");
+// const KMEANS: Function = require("../kmeans.js");
+import KMEANS from "../kmeans.js";
 import { KMeans, Vectors } from "../kmeans";
 
 const sample_input_data: Vectors = [
@@ -31,7 +32,7 @@ var kmeans2: KMeans = KMEANS(sample_input_data, 5, "kmeans++");
 console.log(JSON.stringify(kmeans2));
 
 // // K-means w/ 7 clusters, random centroids, and 15 max iterations
-var kmeans3: KMeans = KMEANS(sample_input_data, 7, null, 15);
+var kmeans3: KMeans = KMEANS(sample_input_data, 7, undefined, 15);
 console.log(JSON.stringify(kmeans3));
 
 const input_data_single = [

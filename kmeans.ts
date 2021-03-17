@@ -147,7 +147,7 @@ function kmeans(
 	return k_means_obj;
 }
 
-module.exports = kmeans;
+export default kmeans;
 
 class Cluster {
 	// K-means initial centroid selection
@@ -251,3 +251,4 @@ class Distance {
 		return sum;
 	}
 }
+export { Cluster, Distance };
