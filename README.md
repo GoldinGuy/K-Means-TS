@@ -53,13 +53,13 @@ Alternatively, you can install the awesome VSCode extension [Code Runner](https:
 Simply import it using the following
 
 ```typescript
-import KMEANS from "../kmeans.js";
+import KMEANS from "../kmeans.ts";
 ```
 
 or
 
 ```typescript
-const KMEANS: Function = require("./<directory>/kmeans.js");
+const KMEANS: Function = require("./<directory>/kmeans.ts");
 ```
 
 If you want to access the Utils or interfaces within the file, use

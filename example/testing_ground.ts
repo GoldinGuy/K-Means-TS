@@ -1,4 +1,4 @@
-import KMEANS from "../kmeans.js";
+import KMEANS from "../kmeans";
 import { KMeans, Vectors } from "../kmeans";
 
 const sample_input_data: Vectors = [
