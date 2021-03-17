@@ -1,6 +1,6 @@
 # K-Means-TS
 
-💹 [K-means](https://en.wikipedia.org/wiki/K-means_clustering) and [k-means++](https://en.wikipedia.org/wiki/K-means%2B%2B) clustering implementation. A Typescript rewrite of [Skmeans-JS](https://github.com/solzimer/skmeans#readme), which is an awesome JS clustering package
+💹 [K-means](https://en.wikipedia.org/wiki/K-means_clustering) and [k-means++](https://en.wikipedia.org/wiki/K-means%2B%2B) clustering implementation. A Typescript rewrite of [Skmeans-JS](https://github.com/solzimer/skmeans#readme), which is an awesome JS clustering package by [@Solzimer](https://github.com/solzimer)
 
 ## Functionality & Params
 
@@ -109,7 +109,6 @@ var kmeans: KMeans = KMEANS(input_data, 7, null, 15);
 ```
 
 K-Means-TS can also be seen in [MTG-Meta-TS](https://github.com/GoldinGuy/MTGMeta-TS)
-
 
 ## Contributing
 
