@@ -53,6 +53,12 @@ Alternatively, you can install the awesome VSCode extension [Code Runner](https:
 Simply import it using the following
 
 ```typescript
+import KMEANS from "../kmeans.js";
+```
+
+or
+
+```typescript
 const KMEANS: Function = require("./<directory>/kmeans.js");
 ```
 

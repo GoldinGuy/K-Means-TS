@@ -1,4 +1,3 @@
-// const KMEANS: Function = require("../kmeans.js");
 import KMEANS from "../kmeans.js";
 import { KMeans, Vectors } from "../kmeans";
 
