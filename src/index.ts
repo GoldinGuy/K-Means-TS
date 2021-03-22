@@ -21,7 +21,7 @@ function init(len: number, val: number, vect: Vector): Vector {
   return vect;
 }
 
-function kmeans(
+export default function kmeans(
   data: UniMultiDimensionalArray,
   k: number,
   init_cent?: String | Array<any>,
@@ -146,8 +146,6 @@ function kmeans(
   };
   return k_means_obj;
 }
-
-export default kmeans;
 
 class Cluster {
   // K-means initial centroid selection
