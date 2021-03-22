@@ -1,4 +1,4 @@
-import kmeans, { KMeans } from '../src';
+import kmeans from '../src';
 
 const input_data_single = [
   0,
@@ -39,16 +39,26 @@ const input_data_single = [
   4,
 ];
 
-var expectedType: KMeans;
-
 describe('test_kmeans', () => {
-  it('successfully generates clusters', () => {
+  it('successfully generates clusters w/ 1 iteration', () => {
     expect(
       kmeans(input_data_single, 2, [
         [3, 1, 5],
         [7, 2, 6],
         [3, 8, 6],
       ])
-    ).toBeInstanceOf(expectedType);
+    ).toHaveProperty('iterations', 1);
+  });
+});
+
+describe('test_kmeans', () => {
+  it('successfully generates 5 clusters', () => {
+    expect(
+      kmeans(input_data_single, 2, [
+        [3, 1, 5],
+        [7, 2, 6],
+        [3, 8, 6],
+      ])
+    ).toHaveProperty('k', 5);
   });
 });
