@@ -88,7 +88,7 @@ var kmeans: KMeans = kmeans(input_data, 5, "kmeans++");
 var kmeans: KMeans = kmeans(input_data, 7, null, 15);
 ```
 
-K-Means-TS can also be seen in [MTG-Meta-TS](https://github.com/GoldinGuy/MTGMeta-TS)
+K-Means-TS can be seen in [MTG-Meta-TS](https://github.com/GoldinGuy/MTGMeta-TS)
 
 ## Development Setup
 
