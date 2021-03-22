@@ -39,18 +39,23 @@ const input_data_single = [
   4,
 ];
 
+interface expectedType {
+  iterations: number;
+  k: number;
+  indexes: number[];
+  centroids: number[][];
+}
+
+var expectedType: expectedType;
+
 describe('test_kmeans', () => {
   it('successfully generates clusters', () => {
     expect(
-      JSON.stringify(
-        kmeans(input_data_single, 2, [
-          [3, 1, 5],
-          [7, 2, 6],
-          [3, 8, 6],
-        ])
-      )
-    ).toEqual(
-      `{"iterations":1,"k":5,"indexes":[1,4,4],"centroids":[[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[1,12,14,4,25,35,22,3,14,5,51,2,23,24,15],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[6,26.5,25,25.5,26,14.5,23,23.5,29,37,37.5,39.5,24.5,12,0]]}`
-    );
+      kmeans(input_data_single, 2, [
+        [3, 1, 5],
+        [7, 2, 6],
+        [3, 8, 6],
+      ])
+    ).toEqual(expectedType);
   });
 });
