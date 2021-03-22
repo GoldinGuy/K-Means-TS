@@ -1,4 +1,4 @@
-import kmeans from '../src';
+import kmeans, { KMeans } from '../src';
 
 const input_data_single = [
   0,
@@ -39,14 +39,7 @@ const input_data_single = [
   4,
 ];
 
-interface expectedType {
-  iterations: number;
-  k: number;
-  indexes: number[];
-  centroids: number[][];
-}
-
-var expectedType: expectedType;
+var expectedType: KMeans;
 
 describe('test_kmeans', () => {
   it('successfully generates clusters', () => {
@@ -56,6 +49,6 @@ describe('test_kmeans', () => {
         [7, 2, 6],
         [3, 8, 6],
       ])
-    ).toEqual(expectedType);
+    ).toBeInstanceOf(expectedType);
   });
 });
