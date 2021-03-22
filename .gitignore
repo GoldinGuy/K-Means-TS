@@ -1,4 +1,4 @@
-.idea
-/sample
-/config.json
-.env
+*.log
+.DS_Store
+node_modules
+dist
