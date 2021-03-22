@@ -52,13 +52,13 @@ describe('test_kmeans', () => {
 });
 
 describe('test_kmeans', () => {
-  it('successfully generates 5 clusters', () => {
+  it('successfully generates 2 clusters', () => {
     expect(
       kmeans(input_data_single, 2, [
         [3, 1, 5],
         [7, 2, 6],
         [3, 8, 6],
       ])
-    ).toHaveProperty('k', 5);
+    ).toHaveProperty('k', 2);
   });
 });
