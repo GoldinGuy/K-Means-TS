@@ -1,8 +1,8 @@
 {
   "name": "kmeans-ts",
   "author": "@GoldinGuy seth@goldin.io",
-  "version": "1.0.0",
-  "description": "A fast, efficient K-Means clustering implementation in TypeScript",
+  "version": "1.0.1",
+  "description": "A fast, efficient k-means clustering implementation in TypeScript",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -63,8 +63,11 @@
     "kmeans-clustering",
     "kmeans-ts",
     "kmeans-typescript",
-    "data",
-    "science"
+    "data-science",
+    "kmeans-algorithm",
+    "fast-kmeans",
+    "centroid",
+    "vector"
   ],
   "bugs": {
     "url": "https://github.com/GoldinGuy/K-Means-TS/issues"
