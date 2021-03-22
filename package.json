@@ -1,7 +1,7 @@
 {
   "name": "kmeans-ts",
   "author": "@GoldinGuy seth@goldin.io",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A fast, efficient k-means clustering implementation in TypeScript",
   "license": "MIT",
   "main": "dist/index.js",
