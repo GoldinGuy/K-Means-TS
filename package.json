@@ -33,7 +33,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "module": "dist/k-means-ts.esm.js",
+  "module": "dist/kmeans-ts.esm.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GoldinGuy/K-Means-TS.git"
